@@ -97,6 +97,14 @@ module.exports = function(grunt) {
         }
       }
     },
+    connect: {
+      server: {
+        options: {
+          port: 9001,
+          base: 'www'
+        }
+      }
+    },
     watch: {
       coffee: {
         files: [
@@ -129,7 +137,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Default task.
-  grunt.registerTask('default', 'watch');
+  grunt.registerTask('default', ['connect', 'watch']);
   grunt.registerTask('rjs', ['clean:rjs', 'requirejs']);
 
 };
