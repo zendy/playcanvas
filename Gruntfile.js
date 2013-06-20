@@ -32,15 +32,15 @@ module.exports = function(grunt) {
     },
     coffee: {
       compile: {
-        // options: {
-        //   sourceMap: true
-        // },
+        options: {
+          sourceMap: true
+        },
         files: [
           {
             expand: true,     // Enable dynamic expansion.
             cwd: 'www/scripts/',      // Src matches are relative to this path.
             src: ['**/**/**/*.coffee'], // Actual pattern(s) to match.
-            dest: 'www/scripts/',   // Destination path prefix.
+            dest: 'www/scripts/prod',   // Destination path prefix.
             ext: '.js'   // Dest filepaths will have this extension.
           }
         ]
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
     compass: {
       dist: {
         options: {
-          cssDir: 'www/styles',
+          cssDir: 'www/styles/prod',
           sassDir: 'www/styles',
           imagesDir: 'www/images',
           javascriptsDir: 'www/scripts',
@@ -58,8 +58,11 @@ module.exports = function(grunt) {
       }
     },
     clean: {
-      build: {
-        src: 'www/styles/**/*.min.css'
+      compass: {
+        src: 'www/styles/prod/*.min.css'
+      },
+      coffee: {
+        src: 'www/scripts/prod/*.js'
       },
       rjs: {
         src: 'www/scripts/build'
@@ -68,9 +71,9 @@ module.exports = function(grunt) {
     cssmin: {
       minify: {
         expand: true,
-        cwd: 'www/styles/',
+        cwd: 'www/styles/prod',
         src: ['**/*.css'],
-        dest: 'www/styles/',
+        dest: 'www/styles/prod/',
         ext: '.min.css'
       }
     },
@@ -110,14 +113,14 @@ module.exports = function(grunt) {
         files: [
           'www/scripts/**/*.coffee'
         ],
-        tasks: ['coffee']
+        tasks: ['clean:coffee', 'coffee']
         // tasks: ['coffee', 'uglify']
       },
       compass: {
         files: [
           'www/styles/**/*.{scss,sass}'
         ],
-        tasks: ['compass', 'clean', 'cssmin']
+        tasks: ['compass', 'clean:compass', 'cssmin']
         // tasks: ['compass', 'cssmin']
       }
     }
