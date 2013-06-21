@@ -3,27 +3,22 @@
 define () ->
   class Object
     constructor: ( options ) ->
-      # need to tidy up constructor
-      @x = 0
-      @y = 0
-      @width = 50
-      @height = 50
+      @x = if options.hasOwnProperty( 'x' ) then options.x else 0
+      @y = if options.hasOwnProperty( 'y' ) then options.y else 0
+      @width = if options.hasOwnProperty( 'width' ) then options.width else 0
+      @height = if options.hasOwnProperty( 'height' ) then options.height else 0
+      @active = false
       @ctx = options.ctx
-      # move this to child class
-      @loaded = false
-      @img = null
 
     draw: () ->
-      that = @
-      do ( that ) ->
-        that.img.onload = () ->
-          that.ctx.drawImage that.img, that.x, that.y, that.width, that.height
+      # implement drawing in child class
 
-    # move this to child class
-    loadImage: () ->
-      @img = new Image()
-      @img.src = 'images/icon_branding.png'
+    move: ( x, y ) ->
+      @x = x
+      @y = y
 
-    imageLoaded: () ->
-      # @draw()
-      # @loaded = true
+    grab: ( bool ) ->
+      @active = bool
+
+    isActive: () ->
+      @active

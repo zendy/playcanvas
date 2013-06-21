@@ -4,31 +4,28 @@
     var Object;
     return Object = (function() {
       function Object(options) {
-        this.x = 0;
-        this.y = 0;
-        this.width = 50;
-        this.height = 50;
+        this.x = options.hasOwnProperty('x') ? options.x : 0;
+        this.y = options.hasOwnProperty('y') ? options.y : 0;
+        this.width = options.hasOwnProperty('width') ? options.width : 0;
+        this.height = options.hasOwnProperty('height') ? options.height : 0;
+        this.active = false;
         this.ctx = options.ctx;
-        this.loaded = false;
-        this.img = null;
       }
 
-      Object.prototype.draw = function() {
-        var that;
-        that = this;
-        return (function(that) {
-          return that.img.onload = function() {
-            return that.ctx.drawImage(that.img, that.x, that.y, that.width, that.height);
-          };
-        })(that);
+      Object.prototype.draw = function() {};
+
+      Object.prototype.move = function(x, y) {
+        this.x = x;
+        return this.y = y;
       };
 
-      Object.prototype.loadImage = function() {
-        this.img = new Image();
-        return this.img.src = 'images/icon_branding.png';
+      Object.prototype.grab = function(bool) {
+        return this.active = bool;
       };
 
-      Object.prototype.imageLoaded = function() {};
+      Object.prototype.isActive = function() {
+        return this.active;
+      };
 
       return Object;
 
