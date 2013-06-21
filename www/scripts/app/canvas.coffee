@@ -1,10 +1,17 @@
 'use strict'
 
-define [], () ->
+define [ './model/Object' ], ( Object ) ->
 
+  # set up canvas
   canvasContainer = document.querySelector '.mainContainer'
   canvas = document.querySelector '.mainContainer__canvas'
   ctx = canvas.getContext '2d'
+
+  # set up object
+  options =
+    ctx: ctx
+  object1 = new Object options
+  object1.loadImage()
 
   window.onresize = () ->
     resizeCanvas()
@@ -12,11 +19,7 @@ define [], () ->
   drawSVG = () ->
 
   drawPNG = () ->
-    if ctx
-      img1 = new Image()
-      img1.src = '../images/icon_branding.png'
-      img1.onload = () ->
-        ctx.drawImage img1, 0, 0
+    object1.draw()
 
   setCanvas = () ->
     canvas.height = canvasContainer.offsetHeight
