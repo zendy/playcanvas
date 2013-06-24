@@ -7,7 +7,6 @@ define () ->
       @y = if options.hasOwnProperty( 'y' ) then options.y else 0
       @width = if options.hasOwnProperty( 'width' ) then options.width else 0
       @height = if options.hasOwnProperty( 'height' ) then options.height else 0
-      @active = false
       @ctx = options.ctx
 
     draw: () ->

@@ -8,7 +8,6 @@ define [ './Object' ], ( Object ) ->
       @y = 0
       @width = 50
       @height = 50
-      @active = false
       @ctx = options.ctx
       @text = options.text
 

@@ -8,7 +8,6 @@
         this.y = options.hasOwnProperty('y') ? options.y : 0;
         this.width = options.hasOwnProperty('width') ? options.width : 0;
         this.height = options.hasOwnProperty('height') ? options.height : 0;
-        this.active = false;
         this.ctx = options.ctx;
       }
 

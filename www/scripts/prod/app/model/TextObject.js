@@ -13,7 +13,6 @@
         this.y = 0;
         this.width = 50;
         this.height = 50;
-        this.active = false;
         this.ctx = options.ctx;
         this.text = options.text;
       }

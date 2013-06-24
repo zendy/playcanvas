@@ -27,7 +27,7 @@
         return clearTimeout(id);
       };
     }
-    return require(['app/canvas']);
+    return require(['app/application_main']);
   });
 
 }).call(this);

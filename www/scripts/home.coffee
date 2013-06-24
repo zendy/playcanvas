@@ -24,4 +24,4 @@ require [ 'common' ], ( common ) ->
       window.cancelAnimationFrame = ( id ) ->
           clearTimeout(id)
 
-  require [ 'app/canvas' ]
+  require [ 'app/application_main' ]
