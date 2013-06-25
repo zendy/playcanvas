@@ -23,4 +23,11 @@ define () ->
       @active
 
     isCollide: ( x, y ) ->
+      # console.log x, y, @x, @x + @width, @y, @y + @height
       if x >= @x and x <= ( @x + @width) and y >= @y and y <= ( @y + @height) then true
+
+    getDimension: () ->
+      x: @x
+      y: @y
+      height: @height
+      width: @width

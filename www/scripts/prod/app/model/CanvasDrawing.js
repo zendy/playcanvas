@@ -49,6 +49,8 @@
           if (canvasObject.isCollide(x, y)) {
             this.setActiveObjectID(id);
             return;
+          } else {
+            this.resetActiveObjectID();
           }
         }
       };
@@ -69,8 +71,16 @@
         return this.activeObject = id;
       };
 
+      CanvasDrawing.prototype.resetActiveObjectID = function() {
+        return this.activeObject = -1;
+      };
+
       CanvasDrawing.prototype.getActiveObjectID = function() {
         return this.activeObject;
+      };
+
+      CanvasDrawing.prototype.getActiveObjectDimension = function() {
+        return this.canvasObjects[this.activeObject].getDimension();
       };
 
       return CanvasDrawing;

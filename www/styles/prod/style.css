@@ -611,5 +611,48 @@ header .btn {
 main {
   height: 25em;
   margin-top: 6em;
+  position: relative;
   border: 2px dashed #999;
+}
+
+/* line 8, ../libs/bootstrap/_main.scss */
+.objectOverlay {
+  display: none;
+  height: 0;
+  position: absolute;
+  width: 0;
+  visibility: hidden;
+}
+
+/* line 16, ../libs/bootstrap/_main.scss */
+.objectOverlay--active {
+  display: block;
+  visibility: visible;
+  background-color: transparent;
+  border: 1px dashed #ccc;
+}
+
+/* line 23, ../libs/bootstrap/_main.scss */
+.objectOverlay__translate, .objectOverlay__rotate, .objectOverlay__scale {
+  display: inline-block;
+  position: absolute;
+  font-size: 0.7em;
+}
+
+/* line 29, ../libs/bootstrap/_main.scss */
+.objectOverlay__translate {
+  left: -1em;
+  top: -1em;
+}
+
+/* line 34, ../libs/bootstrap/_main.scss */
+.objectOverlay__rotate {
+  right: -1em;
+  top: -1em;
+}
+
+/* line 39, ../libs/bootstrap/_main.scss */
+.objectOverlay__scale {
+  bottom: -1em;
+  right: -1em;
 }

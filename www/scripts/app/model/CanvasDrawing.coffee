@@ -37,6 +37,8 @@ define () ->
         if canvasObject.isCollide x, y
           @setActiveObjectID id
           return
+        else
+          @resetActiveObjectID()
 
     addObject: ( canvasObject ) ->
       @canvasObjects.push canvasObject
@@ -50,5 +52,11 @@ define () ->
     setActiveObjectID: ( id ) ->
       @activeObject = id
 
+    resetActiveObjectID: () ->
+      @activeObject = -1
+
     getActiveObjectID: () ->
       @activeObject
+
+    getActiveObjectDimension: () ->
+      @canvasObjects[ @activeObject ].getDimension()

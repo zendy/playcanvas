@@ -1,5 +1,42 @@
 main {
   height: px-to-em( 400px );
   margin-top: 6em;
+  position: relative;
   border: 2px dashed #999;
+}
+
+.objectOverlay {
+  display: none;
+  height: 0;
+  position: absolute;
+  width: 0;
+  visibility: hidden;
+}
+
+.objectOverlay--active {
+  display: block;
+  visibility: visible;
+  background-color: transparent;
+  border: 1px dashed #ccc;
+}
+
+.objectOverlay__translate, .objectOverlay__rotate, .objectOverlay__scale {
+  display: inline-block;
+  position: absolute;
+  font-size: 0.7em;
+}
+
+.objectOverlay__translate {
+  left: -1em;
+  top: -1em;
+}
+
+.objectOverlay__rotate {
+  right: -1em;
+  top: -1em;
+}
+
+.objectOverlay__scale {
+  bottom: -1em;
+  right: -1em;
 }

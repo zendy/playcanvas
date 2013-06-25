@@ -32,6 +32,15 @@
         }
       };
 
+      Object.prototype.getDimension = function() {
+        return {
+          x: this.x,
+          y: this.y,
+          height: this.height,
+          width: this.width
+        };
+      };
+
       return Object;
 
     })();
