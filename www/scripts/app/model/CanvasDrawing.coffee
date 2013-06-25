@@ -32,6 +32,12 @@ define () ->
       @canvasCtx.fillStyle = 'rgba(255, 255, 255, 1)'
       @canvasCtx.fillRect 0, 0, @canvasWidth, @canvasHeight
 
+    checkCollision: ( x, y ) ->
+      for canvasObject, id in @canvasObjects
+        if canvasObject.isCollide x, y
+          @setActiveObjectID id
+          return
+
     addObject: ( canvasObject ) ->
       @canvasObjects.push canvasObject
 
@@ -41,8 +47,8 @@ define () ->
     moveObject: ( id, x, y ) ->
       @canvasObjects[ id ].move x, y
 
-    setActiveObject: ( id ) ->
+    setActiveObjectID: ( id ) ->
       @activeObject = id
 
-    getActiveObject: () ->
+    getActiveObjectID: () ->
       @activeObject

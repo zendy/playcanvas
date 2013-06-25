@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   define(['./model/CanvasDrawing', './model/ImageObject'], function(CanvasDrawing, ImageObject) {
-    var addNewImageObject, canvas, canvasCtx, canvasHeight, canvasLeftPos, canvasTopPos, canvasWidth, checkCollision, dragObject, elBtn1, elCanvas, elCanvasContainer, grabObject, optionsCanvasDrawing, releaseObject;
+    var addNewImageObject, canvas, canvasCtx, canvasHeight, canvasLeftPos, canvasTopPos, canvasWidth, elBtn1, elCanvas, elCanvasContainer, getPosInCanvas, mouseDownInCanvas, mouseMoveInCanvas, mouseUpInCanvas, optionsCanvasDrawing;
     elCanvasContainer = document.querySelector('.mainContainer');
     elCanvas = document.querySelector('.mainContainer__canvas');
     canvasLeftPos = elCanvas.offsetLeft;
@@ -23,28 +23,27 @@
       canvas.resizeCanvas();
       return canvas.redrawCanvas();
     };
-    checkCollision = function(ev) {};
-    dragObject = function(ev) {
-      var activeObject, pointerX, pointerY;
-      ev.preventDefault();
-      activeObject = canvas.getActiveObject();
-      if (~activeObject) {
+    mouseDownInCanvas = function(ev) {
+      var posInCanvas;
+      posInCanvas = getPosInCanvas(ev);
+      return canvas.checkCollision(posInCanvas.x, posInCanvas.y);
+    };
+    mouseMoveInCanvas = function(ev) {
+      var activeObject, posInCanvas;
+      activeObject = canvas.getActiveObjectID();
+      if (activeObject > -1) {
         canvas.resetCanvas();
-        pointerX = ev.x - canvasLeftPos;
-        pointerY = ev.y - canvasTopPos;
-        canvas.moveObject(activeObject, pointerX, pointerY);
+        posInCanvas = getPosInCanvas(ev);
+        canvas.moveObject(activeObject, posInCanvas.x, posInCanvas.y);
         return canvas.redrawCanvas();
       }
     };
-    grabObject = function() {
-      return canvas.setActiveObject(0);
+    mouseUpInCanvas = function() {
+      return canvas.setActiveObjectID(-1);
     };
-    releaseObject = function() {
-      return canvas.setActiveObject(-1);
-    };
-    canvas.addEventListener('click', checkCollision, false);
-    elCanvas.addEventListener('mousemove', dragObject, false);
-    elCanvas.addEventListener('mouseup', releaseObject, false);
+    elCanvas.addEventListener('mousedown', mouseDownInCanvas, false);
+    elCanvas.addEventListener('mousemove', mouseMoveInCanvas, false);
+    elCanvas.addEventListener('mouseup', mouseUpInCanvas, false);
     addNewImageObject = function() {
       var options;
       options = {
@@ -55,7 +54,13 @@
       return canvas.addObject(new ImageObject(options));
     };
     elBtn1 = document.querySelector('.btn1');
-    return elBtn1.addEventListener('click', addNewImageObject, false);
+    elBtn1.addEventListener('click', addNewImageObject, false);
+    return getPosInCanvas = function(ev) {
+      return {
+        x: ev.x - canvasLeftPos,
+        y: ev.y - canvasTopPos
+      };
+    };
   });
 
 }).call(this);

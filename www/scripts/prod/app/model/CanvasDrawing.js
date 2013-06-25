@@ -41,6 +41,18 @@
         return this.canvasCtx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
       };
 
+      CanvasDrawing.prototype.checkCollision = function(x, y) {
+        var canvasObject, id, _i, _len, _ref;
+        _ref = this.canvasObjects;
+        for (id = _i = 0, _len = _ref.length; _i < _len; id = ++_i) {
+          canvasObject = _ref[id];
+          if (canvasObject.isCollide(x, y)) {
+            this.setActiveObjectID(id);
+            return;
+          }
+        }
+      };
+
       CanvasDrawing.prototype.addObject = function(canvasObject) {
         return this.canvasObjects.push(canvasObject);
       };
@@ -53,11 +65,11 @@
         return this.canvasObjects[id].move(x, y);
       };
 
-      CanvasDrawing.prototype.setActiveObject = function(id) {
+      CanvasDrawing.prototype.setActiveObjectID = function(id) {
         return this.activeObject = id;
       };
 
-      CanvasDrawing.prototype.getActiveObject = function() {
+      CanvasDrawing.prototype.getActiveObjectID = function() {
         return this.activeObject;
       };
 

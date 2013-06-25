@@ -26,29 +26,25 @@ define [ './model/CanvasDrawing', './model/ImageObject' ], ( CanvasDrawing, Imag
     canvas.resizeCanvas()
     canvas.redrawCanvas()
 
-  checkCollision = ( ev ) ->
-    # implement this
+  mouseDownInCanvas = ( ev ) ->
+    posInCanvas = getPosInCanvas( ev )
+    canvas.checkCollision posInCanvas.x, posInCanvas.y
 
-  dragObject = ( ev ) ->
-    ev.preventDefault()
-    activeObject = canvas.getActiveObject()
-    if ~activeObject
+  mouseMoveInCanvas = ( ev ) ->
+    activeObject = canvas.getActiveObjectID()
+    if activeObject > -1
       canvas.resetCanvas()
-      pointerX = ev.x - canvasLeftPos
-      pointerY = ev.y - canvasTopPos
+      posInCanvas = getPosInCanvas( ev )
 
-      canvas.moveObject activeObject, pointerX, pointerY
+      canvas.moveObject activeObject, posInCanvas.x, posInCanvas.y
       canvas.redrawCanvas()
 
-  grabObject = () ->
-    canvas.setActiveObject 0
+  mouseUpInCanvas = () ->
+    canvas.setActiveObjectID -1
 
-  releaseObject = () ->
-    canvas.setActiveObject -1
-
-  canvas.addEventListener 'click', checkCollision, false
-  elCanvas.addEventListener 'mousemove', dragObject, false
-  elCanvas.addEventListener 'mouseup', releaseObject, false
+  elCanvas.addEventListener 'mousedown', mouseDownInCanvas, false
+  elCanvas.addEventListener 'mousemove', mouseMoveInCanvas, false
+  elCanvas.addEventListener 'mouseup', mouseUpInCanvas, false
 
   addNewImageObject = () ->
     # set up object
@@ -60,3 +56,9 @@ define [ './model/CanvasDrawing', './model/ImageObject' ], ( CanvasDrawing, Imag
 
   elBtn1 = document.querySelector '.btn1'
   elBtn1.addEventListener 'click', addNewImageObject, false
+
+  getPosInCanvas = ( ev ) ->
+    {
+      x: ev.x - canvasLeftPos
+      y: ev.y - canvasTopPos
+    }

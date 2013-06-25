@@ -21,3 +21,6 @@ define () ->
 
     isActive: () ->
       @active
+
+    isCollide: ( x, y ) ->
+      if x >= @x and x <= ( @x + @width) and y >= @y and y <= ( @y + @height) then true
