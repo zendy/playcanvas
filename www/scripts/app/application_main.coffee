@@ -1,6 +1,6 @@
 'use strict'
 
-define [ './model/CanvasDrawing', './model/ImageObject' ], ( CanvasDrawing, ImageObject ) ->
+define [ './model/CanvasDrawing', './model/ImageObject', './model/TextObject' ], ( CanvasDrawing, ImageObject, TextObject ) ->
 
   # set up canvas
   elCanvasContainer = document.querySelector '.mainContainer'
@@ -31,12 +31,13 @@ define [ './model/CanvasDrawing', './model/ImageObject' ], ( CanvasDrawing, Imag
     canvas.checkCollision posInCanvas.x, posInCanvas.y
 
   mouseMoveInCanvas = ( ev ) ->
-    activeObject = canvas.getActiveObjectID()
-    if activeObject > -1
+    activeObjectID = canvas.getActiveObjectID()
+    console.log activeObjectID
+    if activeObjectID > -1
       canvas.resetCanvas()
       posInCanvas = getPosInCanvas( ev )
 
-      canvas.moveObject activeObject, posInCanvas.x, posInCanvas.y
+      canvas.moveObject activeObjectID, posInCanvas.x, posInCanvas.y
       canvas.redrawCanvas()
 
   mouseUpInCanvas = () ->
@@ -56,6 +57,15 @@ define [ './model/CanvasDrawing', './model/ImageObject' ], ( CanvasDrawing, Imag
 
   elBtn1 = document.querySelector '.btn1'
   elBtn1.addEventListener 'click', addNewImageObject, false
+
+  addNewTextObject = () ->
+    # set up object
+    options =
+      ctx: canvasCtx
+    canvas.addObject( new TextObject options )
+
+  elBtn2 = document.querySelector '.btn2'
+  elBtn2.addEventListener 'click', addNewTextObject, false
 
   getPosInCanvas = ( ev ) ->
     {

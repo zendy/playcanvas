@@ -3,15 +3,23 @@
 define [ './Object' ], ( Object ) ->
   class TextObject extends Object
     constructor: ( options ) ->
-      # need to tidy up constructor
-      @x = 0
-      @y = 0
-      @width = 50
-      @height = 50
-      @ctx = options.ctx
+      super options
       @text = options.text
 
+      @draw()
+
     draw: () ->
+      @text = 'This is test!'
+
       @ctx.fillStyle = 'rgba(0, 0, 0, 1)'
-      @ctx.font = 'italic 40pt Calibri';
-      @ctx.fillText @text, @x+0, @y+100
+      @ctx.font = 'italic 40pt Calibri'
+      @ctx.textBaseline = 'top'
+      @ctx.fillText @text, @x, @y
+
+      # need to refactor
+      @dim = @ctx.measureText @text
+      @height = 40
+      @width = @dim.width
+
+
+

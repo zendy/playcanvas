@@ -23,4 +23,6 @@ define () ->
       @active
 
     isCollide: ( x, y ) ->
-      if x >= @x and x <= ( @x + @width) and y >= @y and y <= ( @y + @height) then true
+      # console.log x, y, @x, @x + @width, @y, @y + @height
+      # console.log x >= @x, x <= ( @x + @width ), y >= @y, y <= ( @y + @height )
+      if x >= @x and x <= ( @x + @width ) and y >= @y and y <= ( @y + @height ) then true

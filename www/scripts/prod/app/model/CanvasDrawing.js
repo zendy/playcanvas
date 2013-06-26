@@ -12,7 +12,7 @@
         this.canvasWidth = options.canvasWidth;
         this.canvasCtx = options.canvasCtx;
         this.canvasObjects = [];
-        this.activeObject = -1;
+        this.activeObjectID = -1;
         this.setCanvas();
       }
 
@@ -49,6 +49,8 @@
           if (canvasObject.isCollide(x, y)) {
             this.setActiveObjectID(id);
             return;
+          } else {
+            this.resetActiveObjectID;
           }
         }
       };
@@ -66,11 +68,15 @@
       };
 
       CanvasDrawing.prototype.setActiveObjectID = function(id) {
-        return this.activeObject = id;
+        return this.activeObjectID = id;
+      };
+
+      CanvasDrawing.prototype.resetActiveObjectID = function() {
+        return this.activeObjectID = -1;
       };
 
       CanvasDrawing.prototype.getActiveObjectID = function() {
-        return this.activeObject;
+        return this.activeObjectID;
       };
 
       return CanvasDrawing;

@@ -9,18 +9,20 @@
       __extends(TextObject, _super);
 
       function TextObject(options) {
-        this.x = 0;
-        this.y = 0;
-        this.width = 50;
-        this.height = 50;
-        this.ctx = options.ctx;
+        TextObject.__super__.constructor.call(this, options);
         this.text = options.text;
+        this.draw();
       }
 
       TextObject.prototype.draw = function() {
+        this.text = 'This is test!';
         this.ctx.fillStyle = 'rgba(0, 0, 0, 1)';
         this.ctx.font = 'italic 40pt Calibri';
-        return this.ctx.fillText(this.text, this.x + 0, this.y + 100);
+        this.ctx.textBaseline = 'top';
+        this.ctx.fillText(this.text, this.x, this.y);
+        this.dim = this.ctx.measureText(this.text);
+        this.height = 40;
+        return this.width = this.dim.width;
       };
 
       return TextObject;

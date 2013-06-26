@@ -11,7 +11,7 @@ define () ->
       @canvasWidth = options.canvasWidth
       @canvasCtx = options.canvasCtx
       @canvasObjects = []
-      @activeObject = -1
+      @activeObjectID = -1
 
       @setCanvas()
 
@@ -37,6 +37,8 @@ define () ->
         if canvasObject.isCollide x, y
           @setActiveObjectID id
           return
+        else
+          @resetActiveObjectID
 
     addObject: ( canvasObject ) ->
       @canvasObjects.push canvasObject
@@ -48,7 +50,10 @@ define () ->
       @canvasObjects[ id ].move x, y
 
     setActiveObjectID: ( id ) ->
-      @activeObject = id
+      @activeObjectID = id
+
+    resetActiveObjectID: () ->
+      @activeObjectID = -1
 
     getActiveObjectID: () ->
-      @activeObject
+      @activeObjectID
